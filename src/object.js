@@ -1,5 +1,4 @@
-define([
-], function() {
+define([], function() {
 
 	/**
 	 * `object` is the base class of the object model.
@@ -28,18 +27,18 @@ define([
 	 *    var dog = animal.subclass(function(that, spec, my) {
 	 *
 	 *        that.getName = function() {
-	 *            return 'dog ' + that.super.getName();
+	 *            return "dog " + that.super.getName();
 	 *        };
 	 *
 	 *        that.say = function(something) {
-	 *            return 'Woof Woof, ' + something;
+	 *            return "Woof Woof, " + something;
 	 *        };
 	 *    });
 	 *
 	 * Creating instances:
 	 *
 	 *    var milou = dog({name: milou});
-	 *    milou.say('hello Tintin'); ;; => 'Woof Woof, hello Tintin'
+	 *    milou.say("hello Tintin"); ;; => "Woof Woof, hello Tintin"
 	 *
 	 * @param{{}} spec
 	 * @param{{}} my
@@ -129,12 +128,12 @@ define([
 			});
 
 			builder(instance, my);
-			if(superCallRegex.test(builder)) {
+			if (superCallRegex.test(builder)) {
 				installSuper(instance, superInstance);
 				installSuper(my, superMy);
 			}
 
-			if(!notFinal) {
+			if (!notFinal) {
 				my.initialize(spec);
 			}
 
@@ -155,8 +154,8 @@ define([
 	object.class = function(builder) {
 		var that = this;
 
-		if(that === object) {
-			throw new Error('object class should not be extended.');
+		if (that === object) {
+			throw new Error("object class should not be extended.");
 		}
 
 		var superClassBuilder = that.classBuilder;
@@ -206,7 +205,6 @@ define([
 		});
 	}
 
-
 	/**
 	 * Extend the class with new methods/properties.
 	 * @param{function} builder takes the same arguments as
@@ -219,12 +217,11 @@ define([
 	/**
 	 * Polyfill for Object.assign
 	 */
-	if (typeof Object.assign != 'function') {
-		(function () {
-			Object.assign = function (target) {
-				'use strict';
+	if (typeof Object.assign !== "function") {
+		(function() {
+			Object.assign = function(target) {
 				if (target === undefined || target === null) {
-					throw new TypeError('Cannot convert undefined or null to object');
+					throw new TypeError("Cannot convert undefined or null to object");
 				}
 
 				var output = Object(target);

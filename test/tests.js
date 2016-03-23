@@ -1,26 +1,23 @@
-require.config({
-    paths: {
-        'chai': '../bower_components/chai/chai'
-    }
-});
-
+var pathPrefix = "../test/";
 var testModules = [
-    'subclassCreationTest',
-	'initializationTest',
-	'inheritanceTest',
-	'superTest',
-	'extensionTest',
-	'allSubclassesTest',
-	'classInheritanceTest',
-	'classReferenceTest'
+	"./src/allSubclassesSpec",
+	"./src/classInheritanceSpec",
+	"./src/classReferenceSpec",
+	"./src/extensionSpec",
+	"./src/inheritanceSpec",
+	"./src/initializationSpec",
+	"./src/subclassCreationSpec",
+	"./src/superSpec"
 ];
 
-require(testModules, function () {
-    if (window.mochaPhantomJS) {
-        window.mochaPhantomJS.run();
-    }
-    else {
-        //mocha.checkLeaks();
-        mocha.run();
-    }
+testModules = testModules.map(function(each) {
+	return pathPrefix + each;
+});
+
+require.config({
+	baseUrl: "../src"
+});
+
+require(testModules, function() {
+	jasmine.getEnv().execute();
 });
